@@ -1,13 +1,12 @@
 import './style.css'
 import Sketch  from './threeScript'
 
-const block = document.querySelector('#app')
+
 let sketch = new Sketch({
   dom:document.getElementById('canvasWrap')
 })
 
 
-const wrap = document.querySelector('#wrap')
 
 let speed = 0
 let position = 0
@@ -33,7 +32,17 @@ const raf = () =>{
     o.dist = 1- o.dist**2
     elems[i].style.transform = `scale(${ 1+0.5 * o.dist})`
  
-    console.log(o.dist)
+ 
+
+    let scale = 1 + (0.15 * o.dist)
+    
+      sketch.meshes[i].position.y = i * .7 - position*.7
+    
+      sketch.meshes[i].scale.set(scale,scale,scale)
+      
+      sketch.meshes[i].material.uniforms.distFromCenter.value = o.dist
+
+
 
   })
 
@@ -41,13 +50,13 @@ const raf = () =>{
 
   let diff = (rounded - position)
 
-  position+= Math.sign(diff) * Math.pow(Math.abs(diff),0.8)*0.015
+  position+= Math.sign(diff) * Math.pow(Math.abs(diff),0.8)*0.035
 
 
 
 
   
-  wrap.style.transform = `translate3d(0,${position*100 + 50}px,0)`
+  //wrap.style.transform = `translate3d(0,${position*100 + 50}px,0)`
 
   window.requestAnimationFrame(raf)
 }
