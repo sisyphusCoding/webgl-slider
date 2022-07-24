@@ -1,8 +1,10 @@
-import win from 'global'
 import './style.css'
+import Sketch  from './threeScript'
 
 const block = document.querySelector('#app')
-
+let sketch = new Sketch({
+  dom:document.getElementById('canvasWrap')
+})
 
 
 const wrap = document.querySelector('#wrap')
@@ -51,3 +53,5 @@ const raf = () =>{
 }
 
 raf()
+
+
